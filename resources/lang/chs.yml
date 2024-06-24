@@ -1,0 +1,229 @@
+#English language file
+#Author: blackjack200
+#Last updated at: 2024-06-21
+
+#If you want to include double quotes (") in your messages please escape them with a backslash (\")
+
+prefix: "§l§aEasy§bEdit §r> "
+
+#Args: {x} {y} {z}
+selected-pos1: "已选择第一个位置为 {x} {y} {z}"
+selected-pos2: "已选择第二个位置为 {x} {y} {z}"
+
+deselected: "已取消当前选择"
+
+no-selection: "你没有活动的选择"
+no-clipboard: "你没有活动的剪贴板"
+
+#Args: {given} {expected}
+wrong-selection: "你的选择类型是 {given}，但需要的是 {expected}"
+
+no-history: "没有可以撤销的操作"
+no-future: "没有可以重做的操作"
+
+no-task: "当前没有正在运行的任务"
+task-cancelled: "当前任务已取消"
+task-cancelled-self: "你的任务已取消"
+
+#Args: {usage}
+wrong-usage: "命令使用错误:\n{usage}"
+
+#Args: {usage} {flag}
+unknown-flag: "未知的标志 {flag}\n{usage}"
+
+#Args: {commands} {start} {end} {total}
+command-list: "命令 (显示 {start} 到 {end} 共 {total} 个):\n{commands}"
+
+#Args: {message}
+task-crash: "§c你的任务崩溃了，请报告这个问题！\n{message}"
+pattern-invalid: "§c你输入的模式无效:\n{message}"
+
+#Args: {time} {changed}
+blocks-set: "在 {time} 秒内设置了 {changed} 个方块"
+blocks-copied: "在 {time} 秒内复制了 {changed} 个方块"
+blocks-pasted: "在 {time} 秒内粘贴了 {changed} 个方块"
+blocks-rotated: "在 {time} 秒内旋转了 {changed} 个方块"
+blocks-flipped: "在 {time} 秒内翻转了 {changed} 个方块"
+blocks-cut: "在 {time} 秒内剪切了 {changed} 个方块"
+
+#Args: {time} {changed} {blocks}
+blocks-counted: "在 {time} 秒内计算了 {changed} 个方块:\n{blocks}"
+
+#Args: {time} {changed} {name}
+schematic-created: "在 {time} 秒内将 {changed} 个方块保存为 \"{name}\""
+
+#Args: {task} {queue} {status} {progress} {storage} {mem_current} {mem_max}
+thread-stats: "编辑线程状态:\n状态: {status}\n当前任务: {task}\n进度: {progress}\n排队的任务: {queue}\n存储的选择: {storage}\n线程内存: {mem_current}MB ({mem_max}MB)"
+
+benchmark-start: "开始基准测试，这可能需要几分钟..."
+benchmark-running: "已有基准测试正在运行"
+
+#Args: {done} {total}
+benchmark-progress: "基准测试进度: {done}/{total}"
+
+#Args: {tps_avg} {tps_min} {load_avg} {load_max} {tasks} {time} {results}
+benchmark-finished: "你的基准测试结果:\n平均TPS: {tps_avg} ({load_avg}%)\n最低TPS: {tps_min} ({load_max}%)\n执行了 {tasks} 个任务，耗时 {time} 秒:\n{results}"
+
+#Args: {task} {name} {time} {blocks}
+benchmark-result: "#{task}: {name} - {blocks} 个方块在 {time} 秒内"
+
+#Args: {state} {id} {meta} {name} {x} {y} {z} {java_state}
+block-info: "{name} ({id}:{meta}) 位于 {x} {y} {z}\n方块状态: {state}\nJava状态: {java_state}"
+
+#Args: {schematic} {known}
+unknown-schematic: "未知的结构 \"{schematic}\"\n已知结构: {known}"
+
+#Commands
+#Note: If command usages contains a short description, it should be spilt with a "-" (e.g. "help - Show this help")
+
+command-pos1-description: "设置第一个位置"
+command-pos1-usage: "//pos1 [x] [y] [z]"
+command-pos2-description: "设置第二个位置"
+command-pos2-usage: "//pos2 [x] [y] [z]"
+command-deselect-description: "取消当前选择"
+command-deselect-usage: "//deselect"
+command-extend-description: "扩展选定区域"
+command-extend-usage:
+  - "//extend [direction] [count]"
+  - "//extend [count] - 向你的朝向扩展选定区域"
+  - "//extend vertical - 垂直完全扩展选定区域"
+  - "//extend --min <x>,<y>,<z> --max <x>,<y>,<z> - 按给定向量修改选定区域"
+command-set-description: "在选定区域设置方块"
+command-set-usage: "//set <pattern>"
+command-replace-description: "替换选定区域的方块"
+command-replace-usage:
+  - "//replace <block> <pattern>"
+  - "//replace <pattern> - 替换选定区域的所有实体方块"
+command-overlay-description: "覆盖选定区域的方块"
+command-overlay-usage: "//overlay <pattern>"
+command-naturalize-description: "自然化选定区域"
+command-naturalize-usage: "//naturalize [pattern] [pattern] [pattern]"
+command-smooth-description: "平滑选定区域"
+command-smooth-usage: "//smooth"
+command-center-description: "设置选定区域的中心方块"
+command-center-usage: "//center [pattern]"
+command-walls-description: "设置选定区域的墙"
+command-walls-usage: "//walls [pattern]"
+command-sides-description: "设置选定区域的侧面"
+command-sides-usage: "//sides [pattern]"
+command-move-description: "移动选定区域"
+command-move-usage:
+  - "//move [direction] [count]"
+  - "//move [count] - 移动选定区域到你的朝向"
+  - "//move -v <x>,<y>,<z> - 按给定向量移动选定区域"
+command-stack-description: "堆叠选定区域"
+command-stack-usage:
+  - "//stack [direction] [count]"
+  - "//stack [count] - 向你的朝向堆叠选定区域"
+command-istack-description: "在不覆盖现有地形的情况下堆叠选定区域"
+command-istack-usage:
+  - "//istack [direction] [count]"
+  - "//istack [count] - 向你的朝向堆叠选定区域"
+command-count-description: "计算选定区域的方块"
+command-count-usage:
+  - "//count"
+  - "//count -d - 计算方块并显示详细的方块状态信息"
+  - "//count [radius] - 计算你周围区域的方块"
+command-extinguish-description: "熄灭选定区域的火焰"
+command-extinguish-usage:
+  - "//extinguish"
+  - "//extinguish [radius] - 熄灭你周围区域的火焰"
+command-view-description: "查看选定区域"
+command-view-usage: "//view"
+
+
+command-undo-description: "撤销你的最新更改"
+command-undo-usage:
+  - "//undo [count]"
+  - "//undo <target> [count] - 撤销目标的最新更改"
+command-redo-description: "重做你的最新更改"
+command-redo-usage:
+  - "//redo [count]"
+  - "//redo <target> [count] - 重做目标的最新更改"
+
+
+command-copy-description: "复制选定区域"
+command-copy-usage:
+  - "//copy - 相对玩家复制"
+  - "//copy -c - 相对选区中心复制"
+command-cut-description: "剪切选定区域并复制到剪贴板"
+command-cut-usage:
+  - "//cut - 相对玩家剪切"
+  - "//cut -c - 相对选区中心剪切"
+command-paste-description: "粘贴剪贴板内容"
+command-paste-usage: "//paste"
+command-insert-description: "插入剪贴板内容"
+command-insert-usage: "//insert"
+command-merge-description: "将当前地形与剪贴板内容合并"
+command-merge-usage: "//merge"
+command-rpaste-description: "用剪贴板内容替换当前地形"
+command-rpaste-usage: "//rpaste"
+command-rotate-description: "旋转剪贴板内容"
+command-rotate-usage: "//rotate"
+command-flip-description: "翻转剪贴板内容，镜像到复制位置"
+command-flip-usage:
+  - "//flip [direction]"
+  - "//flip - 向你的朝向翻转剪贴板内容"
+command-loadschematic-description: "从磁盘加载已保存的结构"
+command-loadschematic-usage: "//loadschematic <schematicName>"
+command-saveschematic-description: "将你的剪贴板内容保存为结构到磁盘"
+command-saveschematic-usage: "//saveschematic <schematicName>"
+
+
+command-sphere-description: "生成一个球体"
+command-sphere-usage: "//sphere <radius> <pattern>"
+command-hsphere-description: "生成一个空心球体"
+command-hsphere-usage: "//hsphere <radius> <pattern> [thickness]"
+command-cylinder-description: "生成一个圆柱"
+command-cylinder-usage: "//cylinder <radius> <height> <pattern>"
+command-hcylinder-description: "生成一个空心圆柱"
+command-hcylinder-usage: "//hcylinder <radius> <height> <pattern> [thickness]"
+command-noise-description: "使用简单噪声函数生成"
+command-noise-usage: "//noise"
+command-cube-description: "生成一个立方体"
+command-cube-usage: "//cube <size> <pattern>"
+command-hcube-description: "生成一个空心立方体"
+command-hcube-usage: "//hcube <size> <pattern> [thickness]"
+
+
+command-commands-description: "列出所有 EasyEdit 命令"
+command-commands-usage: "//commands [page]"
+command-brush-description: "创建一个新的笔刷"
+command-brush-usage:
+  - "//brush sphere [radius] [pattern] [gravity] - 创建一个球形笔刷"
+  - "//brush smooth [radius] - 创建一个平滑笔刷"
+  - "//brush naturalize [radius] [topBlock] [middleBlock] [bottomBlock] - 创建一个自然化笔刷"
+  - "//brush cylinder [radius] [height] [pattern] [gravity] - 创建一个圆柱笔刷"
+  - "//brush paste [insert] - 创建一个粘贴笔刷"
+command-fill-description: "填充一个区域"
+command-fill-usage:
+  - "//fill <block> [direction]"
+  - "//fill <block> - 向你的朝向填充"
+command-drain-description: "排空一个区域"
+command-drain-usage: "//drain"
+command-line-description: "生成一条线"
+command-line-usage:
+  - "//line <x> <y> <z> [pattern] - 画一条到给定位置的直线"
+  - "//line find <x> <y> <z> [pattern] - 寻找一条到目标的有效路径（慢）"
+  - "//line solid <x> <y> <z> [pattern] - 寻找一条到目标的实体路径（慢）"
+command-blockinfo-description: "获取一个方块信息棒"
+command-blockinfo-usage: "//blockinfo"
+command-builderrod-description: "创建一个建筑棒"
+command-builderrod-usage: "//builderrod"
+command-status-description: "获取编辑线程状态"
+command-status-usage: "//status"
+command-cancel-description: "取消当前任务"
+command-cancel-usage: "//cancel"
+command-benchmark-description: "开始基准测试"
+command-benchmark-usage: "//benchmark"
+command-pastestates-description: "粘贴所有已知的方块状态"
+command-pastestates-usage: "//pastestates"
+command-wand-description: "获取一个木斧"
+command-wand-usage: "//wand"
+
+command-thru-description: "穿过方块传送"
+command-thru-usage: "//thru"
+command-unstuck-description: "传送到一个安全的位置"
+command-unstuck-usage: "//unstuck"
+command-up-description: "向上传送"
+command-up-usage: "//up <amount>"
