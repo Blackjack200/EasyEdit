@@ -27,13 +27,13 @@ class InjectingData
 		$serializer->putBlockPosition($this->position);
 		$serializer->putUnsignedVarInt(count($this->blockData));
 		foreach ($this->blockData as [$x, $y, $z, $id]) {
-			$this->injection->putVarInt($x);
-			$this->injection->putUnsignedVarInt(Binary::unsignInt($y));
-			$this->injection->putVarInt($z);
-			$this->injection->putUnsignedVarInt(TypeConverter::getInstance($protocol)->getBlockTranslator()->internalIdToNetworkId($id));
-			$this->injection->putUnsignedVarInt(2); //network flag
-			$this->injection->putUnsignedVarLong(-1); //we don't have any actors
-			$this->injection->putUnsignedVarInt(0); //not synced
+			$serializer->putVarInt($x);
+			$serializer->putUnsignedVarInt(Binary::unsignInt($y));
+			$serializer->putVarInt($z);
+			$serializer->putUnsignedVarInt(TypeConverter::getInstance($protocol)->getBlockTranslator()->internalIdToNetworkId($id));
+			$serializer->putUnsignedVarInt(2); //network flag
+			$serializer->putUnsignedVarLong(-1); //we don't have any actors
+			$serializer->putUnsignedVarInt(0); //not synced
 		}
 		$serializer->putUnsignedVarInt(0); //we don't use the second layer
 		return $serializer->getBuffer();
