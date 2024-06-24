@@ -12,7 +12,6 @@ use platz1de\EasyEdit\thread\output\OutputData;
 use platz1de\EasyEdit\thread\output\TaskResultData;
 use platz1de\EasyEdit\utils\ConfigManager;
 use platz1de\EasyEdit\utils\ExtendedBinaryStream;
-use pocketmine\network\mcpe\convert\TypeConverter;
 use pocketmine\thread\log\ThreadSafeLogger;
 use pocketmine\thread\Thread;
 use Throwable;

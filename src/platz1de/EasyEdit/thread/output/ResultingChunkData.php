@@ -6,6 +6,7 @@ use platz1de\EasyEdit\EasyEdit;
 use platz1de\EasyEdit\thread\EditThread;
 use platz1de\EasyEdit\utils\ExtendedBinaryStream;
 use platz1de\EasyEdit\utils\LoaderManager;
+use platz1de\EasyEdit\world\blockupdate\InjectingData;
 use platz1de\EasyEdit\world\ChunkInformation;
 use platz1de\EasyEdit\world\ReferencedWorldHolder;
 use pocketmine\world\World;
@@ -18,7 +19,7 @@ class ResultingChunkData extends OutputData
 	/**
 	 * @param string             $world
 	 * @param ChunkInformation[] $chunkData
-	 * @param string[]           $injections UpdateSubChunkBlocksPacket data
+	 * @param string[] $injections igbinary-serialized data
 	 */
 	public function __construct(string $world, private array $chunkData, private array $injections = [])
 	{
@@ -93,10 +94,10 @@ class ResultingChunkData extends OutputData
 	}
 
 	/**
-	 * @return string[]
+	 * @return InjectingData[]
 	 */
 	public function getInjections(): array
 	{
-		return $this->injections;
+		return array_map(igbinary_unserialize(...), $this->injections);
 	}
 }

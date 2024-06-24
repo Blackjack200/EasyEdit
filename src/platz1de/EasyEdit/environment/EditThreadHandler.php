@@ -29,7 +29,7 @@ class EditThreadHandler extends ThreadEnvironmentHandler
 			$injections = [];
 		} else {
 			$injections = array_map(static function (InjectingData $injection) {
-				return $injection->toProtocol();
+				return igbinary_serialize($injection);
 			}, $controller->getInjections());
 		}
 		$data = new ResultingChunkData($controller->getManager()->getWorldName(), $controller->getManager()->getModifiedChunks(), $injections);

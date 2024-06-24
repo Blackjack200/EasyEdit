@@ -9,7 +9,6 @@ use platz1de\EasyEdit\thread\chunk\ChunkHandler;
 use platz1de\EasyEdit\thread\chunk\ChunkRequest;
 use platz1de\EasyEdit\thread\EditThread;
 use platz1de\EasyEdit\utils\LoaderManager;
-use platz1de\EasyEdit\world\blockupdate\InjectingData;
 use platz1de\EasyEdit\world\blockupdate\InjectingSubChunkController;
 use platz1de\EasyEdit\world\ChunkController;
 use platz1de\EasyEdit\world\ChunkInformation;
@@ -39,9 +38,7 @@ class MainThreadHandler extends ThreadEnvironmentHandler
 		if (!$controller instanceof InjectingSubChunkController) {
 			$injections = [];
 		} else {
-			$injections = array_map(static function (InjectingData $injection) {
-				return $injection->toProtocol();
-			}, $controller->getInjections());
+			$injections = $controller->getInjections();
 		}
 		LoaderManager::setChunks($controller->getManager()->getWorld(), $controller->getManager()->getModifiedChunks(), $injections);
 	}

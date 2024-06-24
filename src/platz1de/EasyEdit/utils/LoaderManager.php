@@ -3,6 +3,7 @@
 namespace platz1de\EasyEdit\utils;
 
 use platz1de\EasyEdit\listener\ChunkRefreshListener;
+use platz1de\EasyEdit\world\blockupdate\InjectingData;
 use platz1de\EasyEdit\world\blockupdate\UpdateSubChunkBlocksInjector;
 use platz1de\EasyEdit\world\ChunkInformation;
 use pocketmine\block\tile\TileFactory;
@@ -34,7 +35,7 @@ class LoaderManager
 	/**
 	 * @param World              $world
 	 * @param ChunkInformation[] $chunks
-	 * @param string[]           $injections
+	 * @param InjectingData[]           $injections
 	 */
 	public static function setChunks(World $world, array $chunks, array $injections): void
 	{
@@ -57,7 +58,7 @@ class LoaderManager
 	 * @param int              $x
 	 * @param int              $z
 	 * @param ChunkInformation $chunkInformation
-	 * @param string[]         $preparedInjections
+	 * @param InjectingData[]         $preparedInjections
 	 * @see          World::setChunk()
 	 * @noinspection PhpUndefinedFieldInspection
 	 */
@@ -88,8 +89,9 @@ class LoaderManager
 				if ($loader instanceof Player) {
 					if ($preparedInjections !== []) {
 						foreach ($preparedInjections as $injection) {
+							$session = $loader->getNetworkSession();
 							//Hack to allow instant, flicker-free block setting, costly network wise
-							$loader->getNetworkSession()->sendDataPacket(UpdateSubChunkBlocksInjector::create($injection));
+							$session->sendDataPacket(UpdateSubChunkBlocksInjector::create($injection->toProtocol($session->getProtocolId())));
 						}
 					} else {
 						$loader->onChunkChanged($x, $z, $chunk);

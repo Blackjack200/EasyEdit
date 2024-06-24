@@ -94,7 +94,7 @@ class EditTaskHandler
 			return [];
 		}
 		return array_map(static function (InjectingData $injection) {
-			return $injection->toProtocol();
+			return igbinary_serialize($injection);
 		}, $this->result->getInjection($chunk));
 	}
 

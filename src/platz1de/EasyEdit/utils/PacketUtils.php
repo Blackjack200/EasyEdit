@@ -5,7 +5,6 @@ namespace platz1de\EasyEdit\utils;
 use platz1de\EasyEdit\world\clientblock\CompoundBlock;
 use pocketmine\block\Block;
 use pocketmine\math\Vector3;
-use pocketmine\network\mcpe\convert\TypeConverter;
 use pocketmine\network\mcpe\protocol\BlockActorDataPacket;
 use pocketmine\network\mcpe\protocol\types\BlockPosition;
 use pocketmine\network\mcpe\protocol\types\CacheableNbt;
@@ -32,15 +31,16 @@ class PacketUtils
 	 */
 	public static function sendFakeBlockAt(Player $player, Vector3 $pos, Block $block, bool $ignoreData = false): void
 	{
-		$player->getNetworkSession()->sendDataPacket(UpdateBlockPacket::create(
+		$session = $player->getNetworkSession();
+		$session->sendDataPacket(UpdateBlockPacket::create(
 			BlockPosition::fromVector3($pos),
-			TypeConverter::getInstance()->getBlockTranslator()->internalIdToNetworkId($block->getStateId()),
+			$session->getTypeConverter()->getBlockTranslator()->internalIdToNetworkId($block->getStateId()),
 			UpdateBlockPacket::FLAG_NETWORK,
 			UpdateBlockPacket::DATA_LAYER_NORMAL
 		));
 
 		if (!$ignoreData && $block instanceof CompoundBlock) {
-			$player->getNetworkSession()->sendDataPacket(BlockActorDataPacket::create(BlockPosition::fromVector3($pos), new CacheableNbt($block->getData())));
+			$session->sendDataPacket(BlockActorDataPacket::create(BlockPosition::fromVector3($pos), new CacheableNbt($block->getData())));
 		}
 	}
 
@@ -51,8 +51,9 @@ class PacketUtils
 	 */
 	public static function resendBlock(Vector3 $vector, World $world, Player $player): void
 	{
-		foreach ($world->createBlockUpdatePackets([$vector]) as $packet) {
-			$player->getNetworkSession()->sendDataPacket($packet);
+		$session = $player->getNetworkSession();
+		foreach ($world->createBlockUpdatePackets($session->getTypeConverter(), [$vector]) as $packet) {
+			$session->sendDataPacket($packet);
 		}
 	}
 }
