@@ -11,6 +11,7 @@ use platz1de\EasyEdit\convert\LegacyBlockIdConvertor;
 use platz1de\EasyEdit\convert\TileConvertor;
 use platz1de\EasyEdit\EasyEdit;
 use platz1de\EasyEdit\listener\RemapEventListener;
+use platz1de\EasyEdit\thread\EditThread;
 use platz1de\EasyEdit\thread\input\ConfigInputData;
 use platz1de\EasyEdit\world\HeightMapCache;
 use pocketmine\utils\AssumptionFailedError;
@@ -248,13 +249,37 @@ class ConfigManager
 	public static function distributeData(): void
 	{
 		RepoManager::init(self::$dataRepo);
+		if (EditThread::getInstance()->isKilled) {
+			return;
+		}
 		LegacyBlockIdConvertor::load();
+		if (EditThread::getInstance()->isKilled) {
+			return;
+		}
 		BedrockStatePreprocessor::load();
+		if (EditThread::getInstance()->isKilled) {
+			return;
+		}
 		BlockTagManager::load();
+		if (EditThread::getInstance()->isKilled) {
+			return;
+		}
 		BlockStateConvertor::load();
+		if (EditThread::getInstance()->isKilled) {
+			return;
+		}
 		BlockRotationManipulator::load();
+		if (EditThread::getInstance()->isKilled) {
+			return;
+		}
 		ItemConvertor::load();
+		if (EditThread::getInstance()->isKilled) {
+			return;
+		}
 		TileConvertor::load(RepoManager::getVersion());
+		if (EditThread::getInstance()->isKilled) {
+			return;
+		}
 		HeightMapCache::loadIgnore(self::$terrainIgnored);
 	}
 
