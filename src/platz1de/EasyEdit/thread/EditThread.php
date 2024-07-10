@@ -30,6 +30,7 @@ class EditThread extends Thread
 
 	private string $inputData;
 	private string $outputData;
+	public bool $isKilled = false;
 
 	/**
 	 * EditThread constructor.
